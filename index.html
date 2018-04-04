@@ -1,0 +1,97 @@
+<html>
+	<head>
+        <script src="reference/js/jquery-1.11.1.min.js"></script>
+        <script src="reference/js/main.js"></script>
+        <script src="reference/js/bootstrap.min.js"></script>
+
+        <link href="reference/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="reference/css/main.css" rel="stylesheet">
+    </head>
+
+
+  <body class="body-green" data-elink-extension-installed="1.1.5">
+
+    <!-- Body -->
+	<div class="wrapper body-inverse"> <!-- wrapper -->
+	  <div class="container">
+	    <div class="row" style="padding-top: 4%">
+		  <!-- Sign In form -->
+		  <div class="col-sm-5 col-sm-offset-1" style="padding: 7%;">
+		    <h3>Sign In to your account</h3>
+			<p class="text-muted">
+			  Please fill out the form below to login to your account.
+			</p>
+			<div class="form-white">
+			  <form role="form">
+			    <div class="form-group">
+				  <label for="email"><span style="color:red; font-size: 17px;">*</span>Email address</label>
+				  <input type="email" class="form-control" id="email" placeholder="Enter email">
+			    </div>
+			    <div class="form-group">
+				  <label for="password"><span style="color:red; font-size: 17px;">*</span>Password</label>
+				  <input type="password" class="form-control" id="password" placeholder="Password">
+			    </div>
+			    <div class="checkbox">
+			    </div>
+			    <button type="submit" class="btn btn-block btn-color btn-xxl">Submit</button>
+			  </form>
+
+
+			  <div class="hidden" id="lost-form">
+			  <p>Enter your email address and we will send you a link to reset your password.</p>
+				<form role="form">
+			      <div class="form-group">
+				    <label for="email-lost">Email address</label>
+				    <input type="email" class="form-control" id="email-lost" placeholder="Enter email">
+			      </div>
+				  <button type="submit" class="btn btn-default">Send</button>
+				</form>
+			  </div>
+			  <div class="form-avatar hidden-xs">
+				<span class="fa-stack fa-4x">
+				  <i class="fa fa-circle fa-stack-2x"></i>
+				  <i class="fa fa-user fa-stack-1x"></i>
+				</span>
+			  </div>
+			</div>
+		  </div>
+		  <!-- Sign Up form -->
+		  <div class="col-sm-5" style="padding: 7%; border-left: 2px solid green;">
+		    <h3 class="text-right-xs">Sign Up to your account</h3>
+			<p class="text-muted text-right-xs">
+			  Please fill out the form below to create a new account.
+			</p>
+			<div class="form-white">
+				<form role="form">
+				  <!-- <div class="form-group">
+				    <label for="username"><span style="color:red; font-size: 17px;">*</span>Username</label>
+					<input type="text" class="form-control" id="username" placeholder="Username" required>
+				  </div> -->
+				  <div class="form-group">
+				    <label for="email2"><span style="color:red; font-size: 17px;">*</span>Email address</label>
+					<input type="email" class="form-control" id="email2" placeholder="Enter email" required>
+				  </div>
+				  <div class="form-group">
+					<div class="row">
+					  <div class="col-sm-6">
+					  <label for="password2"><span style="color:red; font-size: 17px;">*</span>Password</label>
+					  <input type="password" class="form-control" id="password2" placeholder="Password">
+					  </div>
+					  <div class="col-sm-6">
+					  <label for="password2"><span style="color:red; font-size: 17px;">*</span>Repeat password</label>
+					  <input type="password" class="form-control" id="password3" placeholder="Password">
+					  </div>
+					</div>
+					</div>
+					<div class="checkbox">
+						</div>
+				  <button type="submit" class="btn btn-block btn-color btn-xxl">Create an account</button>
+				</form>
+			</div>
+		  </div>
+		</div>
+	  </div>
+    </div> <!-- / wrapper -->
+</body>
+</html>
+    

@@ -1,0 +1,37 @@
+<div class="col-sm-5 col-sm-offset-1" style="padding: 7%;">
+  <h3>Login</h3>
+<p class="text-muted left-alignment">
+  Please fill out the form below to login to your account.
+</p>
+<div class="form-white">
+    <form (ngSubmit)="login()">
+      <div class="form-group left-alignment">
+        <label for="email" class="float-left"><span class="asterix">*</span>Username</label>
+        <input type="email" class="form-control" [(ngModel)]="newLogin.username" name="username" placeholder="Enter username">
+      </div>
+
+      <div class="form-group left-alignment">
+        <label for="password"><span class="asterix">*</span>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="newLogin.password" name="password" placeholder="Password">
+      </div>
+
+      <div class="checkbox">
+      </div>
+
+      <button type="submit" class="btn btn-block btn-color btn-xxl btn-success">Login</button>
+    </form>
+
+    <br>
+    <div id="incorrect-password" class="asterix fontsize hidden">
+      <p>Incorrect Username or Password</p>
+    </div>
+
+    <div id="username-not-exists" class="asterix fontsize hidden">
+      <p>Username does not exists</p>
+    </div>
+
+  </div>
+</div>
+<!-- Sign Up form -->
+
+
