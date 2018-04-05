@@ -1,18 +1,18 @@
-<div class="col-sm-5 col-sm-offset-1" style="padding: 7%;">
+<div class="col-sm-5 col-sm-offset-1" style="padding: 5%;">
   <h3>Login</h3>
 <p class="text-muted left-alignment">
   Please fill out the form below to login to your account.
 </p>
 <div class="form-white">
-    <form (ngSubmit)="login()">
+    <form (ngSubmit)="login()" ngNativeValidate>
       <div class="form-group left-alignment">
         <label for="email" class="float-left"><span class="asterix">*</span>Username</label>
-        <input type="email" class="form-control" [(ngModel)]="newLogin.username" name="username" placeholder="Enter username">
+        <input type="text" class="form-control" [(ngModel)]="newLogin.username" name="username" placeholder="Enter username" required>
       </div>
 
       <div class="form-group left-alignment">
         <label for="password"><span class="asterix">*</span>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="newLogin.password" name="password" placeholder="Password">
+        <input type="password" class="form-control" [(ngModel)]="newLogin.password" name="password" placeholder="Password" required>
       </div>
 
       <div class="checkbox">
@@ -22,11 +22,11 @@
     </form>
 
     <br>
-    <div id="incorrect-password" class="asterix fontsize hidden">
+    <div *ngIf="incorrectPwd" id="incorrect-password" class="asterix fontsize">
       <p>Incorrect Username or Password</p>
     </div>
 
-    <div id="username-not-exists" class="asterix fontsize hidden">
+    <div *ngIf="usernameNotExists" class="asterix fontsize hidden">
       <p>Username does not exists</p>
     </div>
 

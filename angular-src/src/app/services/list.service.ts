@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { List } from '../models/List'
 
 import 'rxjs/add/operator/map';
@@ -20,10 +20,10 @@ export class ListService {
       //   return this.http.get(URI)
 
       return this.http.get('./assets/data/data.json')
-            .map(res => res.json())
-            .map(res => 
-              <List[]>res.list
-            );
+        .map(res => res.json())
+        .map(res => 
+          <List[]>res.list
+        );
     }
 
     public deleteList(listId : string) {

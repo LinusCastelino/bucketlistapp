@@ -3,6 +3,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Login } from '../models/Login';
 import { LoginService } from '../services/login.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,13 +11,13 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
   private newLogin :Login;
-  @Output() addList: EventEmitter<Login> = new EventEmitter<Login>();
+  public incorrectPwd = false;
+
   constructor(private loginServ: LoginService) { }
 
   ngOnInit() {
     console.log("Initial data!");
     this.newLogin = {
-      
   		username:'',
       password:'',
   	}
@@ -24,15 +25,19 @@ export class LoginComponent implements OnInit {
 
   public login() {
   	//console.log(this.newLogin.password);
-     this.loginServ.login(this.newLogin)
-     //.subscribe(
-  // 		response=> {
-  			
-  // 			if(response.success== true)
-  // 				this.addList.emit(this.newList);
-  // 		},
-	// );
-
+     const response = this.loginServ.login(this.newLogin);
+     this.incorrectPwd = false;
+  			if(response == true){
+          //this.addList.emit(this.newList);
+          console.log(response);
+         // this.router.navigateByUrl('/bucketlist');
+          //this.router.navigateByUrl('/bucketlist');
+          
+        }
+        if(response == false){
+          console.log("In false");
+          this.incorrectPwd = true;
+        }
 	}
 
 }
