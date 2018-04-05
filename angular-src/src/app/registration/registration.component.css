@@ -13,3 +13,22 @@
     color:green; 
     font-size: 15px;
 }
+    
+.error-text{
+    font-size: 13px;
+    font-family: 'serif';
+    padding-left: 8px;
+    color:#de2f2f;
+}
+
+input.ng-valid.ng-touched  {
+    
+    border: 1px solid #5cb85c;
+    border-left: 5px solid #5cb85c;
+  }
+  
+  input.ng-invalid.ng-touched  {
+    
+    border: 1px solid #de2f2f;
+    border-left: 5px solid #de2f2f;
+  }

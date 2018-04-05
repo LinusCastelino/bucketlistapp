@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Registration } from '../models/Registration';
 import { RegistrationService } from '../services/registration.service';
 
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -33,6 +34,7 @@ export class RegistrationComponent implements OnInit {
     }
     else{
       this.areNotEqual = true;
+      //password3.setCustomValidity("Passwords Don't Match");
     }
   }
 }

@@ -4,11 +4,7 @@
   Please fill out the form below to create a new account.
 </p>
 <div class="form-white">
-  <form (ngSubmit)="registration()" ngNativeValidate>
-    <!-- <div class="form-group">
-      <label for="username"><span style="color:red; font-size: 17px;">*</span>Username</label>
-    <input type="text" class="form-control" id="username" placeholder="Username" required>
-    </div> -->
+  <form (ngSubmit)="registration()" ngNativeValidate #form="ngForm">
     <div class="form-group left-alignment">
       <label for="email2"><span class="asterix">*</span>Username</label>
     <input type="text" class="form-control" [(ngModel)]="newRegistration.username" name="username" placeholder="Enter username" required>
@@ -17,18 +13,30 @@
     <div class="row">
       <div class="col-sm-6">
       <label for="password2"><span class="asterix">*</span>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="newRegistration.password2" name="password2" placeholder="Password" required>
+      <input type="password" class="form-control" [(ngModel)]="newRegistration.password2"  name="password2" id="password2" placeholder="Password" #password2="ngModel" required>
+      <span class="help-block error-text"
+        *ngIf="password2.touched && password2.errors?.required">
+        Password is required
+      </span>
       </div>
       <div class="col-sm-6">
       <label for="password2"><span class="asterix">*</span>Confirm password</label>
-      <input type="password" class="form-control" [(ngModel)]="newRegistration.password3" name="password3" placeholder="Password" required>
-      <span *ngIf="areNotEqual" class="asterix fontsize">Password does not match!</span>
+      <input type="password" class="form-control" [(ngModel)]="newRegistration.password3" name="password3" id="password3" appConfirmEqualValidator="password2"  placeholder="Confirm Password" #password3="ngModel" required>
+      <!-- <span *ngIf="areNotEqual" class="asterix fontsize">Password does not match!</span> -->
+      <span class="help-block error-text"
+        *ngIf="password3.touched && password3.errors?.required">
+        Confirm Password is required
+      </span>
+      <span class="help-block error-text"
+        *ngIf="password3.touched && password3.errors?.notEqual">
+        Password does not match
+      </span>
       </div>
     </div>
     </div>
     <div class="checkbox">
       </div>
-    <button type="submit" class="btn btn-block btn-color btn-xxl btn-success">Create an account</button>
+    <button type="submit" [disabled]="form.invalid" class="btn btn-block btn-color btn-xxl btn-success">Create an account</button>
   </form>
   <br>
   <div id="already-exists" class="hidden">

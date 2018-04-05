@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './services/login.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { RegistrationService } from './services/registration.service';
+import { ConfirmEqualValidatorDirective } from './directives/validation/confirm-equal-validator.directive';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RegistrationService } from './services/registration.service';
     AddListComponent,
     ViewListComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ConfirmEqualValidatorDirective
   ],
   //All the modules are declared as imports
   imports: [
