@@ -1,16 +1,14 @@
   <!-- <app-navigation-tab></app-navigation-tab> -->
   <br>
   <!-- Table starts here -->
-  <h3 class= "custom-title">My List</h3>
-  <table id="table" class="table table-hover table-mc-light-blue table-striped">
+  <h3 class= "custom-title">Others List</h3>
+  <table id="table" class="table table-hover table-mc-light-blue">
       <thead>
         <tr class="align-center">
           <th class="align-center">Priority Level</th>
           <th class="align-center">Title</th>
           <th class="align-center"> Description</th>
-          <th class="align-center"> Assign </th>
-          <th class="align-center"> Delete </th>
-          
+          <th class="align-center"> Claim </th>
         </tr>
       </thead>
       <tbody>
@@ -18,12 +16,10 @@
       	  <td>{{list.category}}</td>
           <td>{{list.title}}</td>
           <td>{{list.description}}</td>
-          <td> <button type="button" class="btn btn-success" (click)="assignList(list); $event.stopPropagation();">Assign</button></td>  
-          <td> <button type="button" class="btn btn-danger"  (click)="deleteList(list); $event.stopPropagation();">Delete</button></td>
+          <td> <button type="button" class="btn btn-success" (click)="claimList(list); $event.stopPropagation();">Claim</button></td>  
         </tr>
       </tbody>
    </table>
-   <hr>
 
 
- 
+ <!-- <app-add-list (addList)="onAddList($event)"> </app-add-list> -->

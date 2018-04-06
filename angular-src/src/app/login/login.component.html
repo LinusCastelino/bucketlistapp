@@ -4,21 +4,29 @@
   Please fill out the form below to login to your account.
 </p>
 <div class="form-white">
-    <form (ngSubmit)="login()" ngNativeValidate>
+    <form (ngSubmit)="login()" ngNativeValidate #form="ngForm">
       <div class="form-group left-alignment">
         <label for="email" class="float-left"><span class="asterix">*</span>Username</label>
-        <input type="text" class="form-control" [(ngModel)]="newLogin.username" name="username" placeholder="Enter username" required>
+        <input type="text" class="form-control" [(ngModel)]="newLogin.username" name="username" placeholder="Enter username" #username="ngModel" required>
+        <span class="help-block error-text"
+        *ngIf="username.touched && username.errors?.required">
+        Username is required
+      </span>
       </div>
 
       <div class="form-group left-alignment">
         <label for="password"><span class="asterix">*</span>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="newLogin.password" name="password" placeholder="Password" required>
+        <input type="password" class="form-control" [(ngModel)]="newLogin.password" name="password" placeholder="Password" #password="ngModel" required>
+        <span class="help-block error-text"
+        *ngIf="password.touched && password.errors?.required">
+        Password is required
+      </span>
       </div>
 
       <div class="checkbox">
       </div>
 
-      <button type="submit" class="btn btn-block btn-color btn-xxl btn-success">Login</button>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-block btn-color btn-xxl btn-success">Login</button>
     </form>
 
     <br>

@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+.asterix{
+    color:red; 
+    font-size: 17px;
+}
+
+.left-alignment {
+    text-align:left;
+}
+.fontsize{
+    font-size: 15px;
+}
+.success{
+    color:green; 
+    font-size: 15px;
+}
+    
+.error-text{
+    font-size: 13px;
+    font-family: 'serif';
+    padding-left: 8px;
+    color:#de2f2f;
+}
+
+input.ng-valid.ng-touched  {
+    
+    border: 1px solid #5cb85c;
+    border-left: 5px solid #5cb85c;
+  }
+  
+  input.ng-invalid.ng-touched  {
+    
+    border: 1px solid #de2f2f;
+    border-left: 5px solid #de2f2f;
+  }
+
+  .custom-title{
+    background-color: #6bb96b;
+    color: white;
+    border-radius: 25px;
+    padding: 5px;
+    background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));
+  }
+
+  

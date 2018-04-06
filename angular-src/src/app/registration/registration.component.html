@@ -6,18 +6,25 @@
 <div class="form-white">
   <form (ngSubmit)="registration()" ngNativeValidate #form="ngForm">
     <div class="form-group left-alignment">
-      <label for="email2"><span class="asterix">*</span>Username</label>
-    <input type="text" class="form-control" [(ngModel)]="newRegistration.username" name="username" placeholder="Enter username" required>
+      <label for="username"><span class="asterix">*</span>Username</label>
+    <input type="text" class="form-control" [(ngModel)]="newRegistration.username" name="username" placeholder="Enter username" #username="ngModel" required>
+    <span class="help-block error-text"
+        *ngIf="username.touched && username.errors?.required">
+        Username is required
+      </span>
     </div>
     <div class="form-group left-alignment">
     <div class="row">
       <div class="col-sm-6">
       <label for="password2"><span class="asterix">*</span>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="newRegistration.password2"  name="password2" id="password2" placeholder="Password" #password2="ngModel" required>
+      <input type="password" class="form-control" [(ngModel)]="newRegistration.password2" name="password2" id="password2" placeholder="Password" #password2="ngModel" minlength="8" required>
       <span class="help-block error-text"
         *ngIf="password2.touched && password2.errors?.required">
         Password is required
       </span>
+      <!-- <div *ngIf="password2.errors.minlength">
+          Password must be at least 8 characters long.
+        </div> -->
       </div>
       <div class="col-sm-6">
       <label for="password2"><span class="asterix">*</span>Confirm password</label>

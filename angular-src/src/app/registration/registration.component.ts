@@ -15,13 +15,14 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private registrationServ: RegistrationService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log("Initial data!");
     this.newRegistration = {
   		username:'',
       password2:'',
       password3:''
-  	}
+    }
+    
   }
   public registration() {
     if(this.newRegistration.password2 == this.newRegistration.password3){
