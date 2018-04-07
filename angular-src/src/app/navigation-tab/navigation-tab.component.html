@@ -1,23 +1,22 @@
 <!-- <ul class="nav nav-pills">
     <li class="active"><a href="#">My List</a></li>
     <li><a href="#">View others list</a></li>
-    
+
   </ul> -->
   <div>
   <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="pill" href="#myList">My List</a></li>
-      <li><a data-toggle="pill" href="#othersList">Others list</a></li>     
+      <li><a data-toggle="pill" href="#othersList">Others list</a></li>
     </ul>
-    
+
     <div class="tab-content">
       <div id="myList" class="tab-pane fade in active">
-        <app-view-list></app-view-list>
         <app-add-list (addList)="onAddList($event)"> </app-add-list>
+        <app-view-list></app-view-list>
       </div>
       <div id="othersList" class="tab-pane fade">
         <app-view-others-list></app-view-others-list>
       </div>
-     
+
     </div>
   </div>
-  

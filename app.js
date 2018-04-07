@@ -32,14 +32,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/', (req,res) => {
-	res.send("Hi world!");
+//Routing all HTTP requests to /api to bucketlist controller
+app.use('/api',bucketlist);
+
+//Routing all HTTP request to angular components via index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'))
 })
-
-
-//Routing all HTTP requests to /bucketlist to bucketlist controller
-app.use('/bucketlist',bucketlist);
-
 
 //Listen to port 3000
 app.listen(port, () => {

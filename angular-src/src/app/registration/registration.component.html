@@ -22,9 +22,9 @@
         *ngIf="password2.touched && password2.errors?.required">
         Password is required
       </span>
-      <!-- <div *ngIf="password2.errors.minlength">
+       <span class="help-block error-text" *ngIf="password2.errors?.minlength">
           Password must be at least 8 characters long.
-        </div> -->
+        </span>
       </div>
       <div class="col-sm-6">
       <label for="password2"><span class="asterix">*</span>Confirm password</label>
