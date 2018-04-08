@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -9,6 +10,9 @@ import { routingComponents } from './app-routing.module';
 import { ListService } from './services/list.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
 // import { ConfirmEqualValidatorDirective } from './directives/validation/confirm-equal-validator.directive';
 //import { HomeComponent } from './home/home.component';
 // import { AddListComponent } from './add-list/add-list.component';
@@ -29,12 +33,18 @@ import { RegistrationService } from './services/registration.service';
   //All the modules are declared as imports
   imports: [
     BrowserModule,
+    HttpClientModule,
     HttpModule,
     FormsModule,
     AppRoutingModule
   ],
   //All the services go here.
-  providers: [ListService, LoginService, RegistrationService],
+  providers: [ListService, LoginService, RegistrationService, AuthGuard, LoginGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,16 +12,16 @@ export class ListService {
 
     private serverApi= 'http://localhost:3000';
 
-    
+
     public getAllLists():Observable<List[]> {
-        
-      
+
+
       // let URI = `${this.serverApi}/bucketlist/`;
       //   return this.http.get(URI)
 
       return this.http.get('./assets/data/data.json')
         .map(res => res.json())
-        .map(res => 
+        .map(res =>
           <List[]>res.list
         );
     }

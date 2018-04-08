@@ -11,7 +11,8 @@ import { RegistrationService } from '../services/registration.service';
 export class RegistrationComponent implements OnInit {
   private newRegistration :Registration;
   public userAdded = false;
-  public areNotEqual = false;
+  public userAlreadyExists = false;
+  public error = false;
 
   constructor(private registrationServ: RegistrationService) { }
 
@@ -22,20 +23,27 @@ export class RegistrationComponent implements OnInit {
       password2:'',
       password3:''
     }
-    
   }
+
   public registration() {
-    if(this.newRegistration.password2 == this.newRegistration.password3){
-      this.areNotEqual = false;
-      const response = this.registrationServ.registration(this.newRegistration);   
-      if(response == true){
-        console.log("In true");
-        this.userAdded=true;
+    const response = this.registrationServ.registration(this.newRegistration)
+    .subscribe(
+      res => {
+          console.log("registration response "  + JSON.stringify(res));
+          if(res.message === 'User Id Already Exist'){
+            this.userAlreadyExists = true;
+          }
+          else {
+            this.userAlreadyExists = false;
+            this.error = false;
+            this.userAdded = true;
+          }
+        }
+      ,
+      err => {console.log(err);
+          this.error = true;
       }
-    }
-    else{
-      this.areNotEqual = true;
-      //password3.setCustomValidity("Passwords Don't Match");
-    }
+    );
+
   }
 }

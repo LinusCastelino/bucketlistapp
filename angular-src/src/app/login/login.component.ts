@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-  	//console.log(this.newLogin.password);
      const response = this.loginServ.login(this.newLogin)
      .subscribe(
        res => {

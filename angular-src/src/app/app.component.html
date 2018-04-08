@@ -3,6 +3,8 @@
   <h1 class="header-class">
      {{title}}
   </h1>
+  <span *ngIf="_loginService.loggedIn()"> Howdy {{ username }} ,</span>
+  <a class="nav-link" style="cursor:pointer" *ngIf="_loginService.loggedIn()" (click)="_loginService.logoutUser()">Logout</a>
   <div class="container">
     <router-outlet></router-outlet>
   </div>

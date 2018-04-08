@@ -4,17 +4,19 @@ const router = express.Router();
 const request = require('request-promise');
 const jwt = require('jsonwebtoken')
 const bucketlist = require('../models/List');
+const appID = "bucketListApp";
 
 
-//POST HTTP method /loginServ
+//POST HTTP method /login
 router.post('/login', (req,res) => {
+   const { apiLogger } = req;
 	 let body = req.body;
-   console.log("Request body login " + JSON.stringify(body));
+   apiLogger.info("Request body login " + JSON.stringify(body));
 	 const options = {
 		 method : 'PUT',
 		 url : 'http://localhost:8080/user/authenticate/user',
 		 body : {
-			 "applicationId": "bucketListApp",
+			 "applicationId": appID,
 		 	 "password": req.body.password,
 		 	 "userId": req.body.username
 		 },
@@ -22,79 +24,95 @@ router.post('/login', (req,res) => {
 	 }
 	 request(options)
 	 .then(function (response){
-		 console.log(JSON.stringify(response));
+		 apiLogger.info(JSON.stringify(response));
 		 if(response.message === "Wrong Password"){
-	 	 			 console.log("Wrong password");
+	 	 			 apiLogger.info("Wrong password");
 	 	 			 res.status(401).send('Invalid Password');
 	 	 		 }
 	 	 		 else if(response.message === "Unable To Find User"){
-	 	 			  console.log("Wrong username");
+	 	 			  apiLogger.info("Wrong username");
 	 	 			 res.status(401).send('Invalid Username');
 	 	 		 }
 	 	 		 else {
-	 	 			 console.log("setting up token");
-	 	 			 let payload = {subject: req.body.username}
-	 	        let token = jwt.sign(payload, 'secretKey')
+	 	 			 apiLogger.info("setting up token");
+					 req.session.username = req.body.username;
+	 	 			 let payload = {subject: req.body.username};
+	 	       let token = jwt.sign(payload, 'secretKey');
+						apiLogger.info(`User : ${req.session.username} logged in`);
 	 	        res.status(200).send({token})
 	 	 		 }
 	 })
 	 .catch(function (err){
 		 console.error("error " + err );
 	 })
-	
+
 });
 
-//GET HTTP method to /bucketlist
-router.get('/',(req,res) => {
-	bucketlist.getAllLists((err, lists)=> {
-		if(err) {
-			res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
-		}
-		else {
-			res.write(JSON.stringify({success: true, lists:lists},null,2));
-			res.end();
+router.get('/logout', (req,res) => {
+	const { apiLogger } = req;
+	let user = req.session.username;
+	req.session.destroy((err) => {
+    if (err) {
+      res.status(500).send('Could not log out.');
+    } else {
+			apiLogger.info(`User : ${user} logged out`);
+      res.status(200).send({});
+    }
+  });
+});
 
+
+//POST HTTP method /registration
+router.post('/registration', (req,res) => {
+	 const { apiLogger } = req;
+	 let body = req.body;
+   apiLogger.info("Request body login " + JSON.stringify(body));
+	 const options = {
+		 method : 'POST',
+		 url : 'http://localhost:8080/user/create',
+		 body : {
+			 "applicationId": appID,
+		 	 "password": req.body.password,
+		 	 "userName": req.body.username
+		 },
+		 json: true
+	 }
+	 request(options)
+	 .then(function (response){
+		 apiLogger.info(JSON.stringify(response));
+	   res.status(200).send(response)
+	 })
+	 .catch(function (err){
+		 console.error("error " + err );
+	 })
+
+});
+
+//get username from session
+router.get('/getUsername', verifyToken, (req,res) => {
+	const { apiLogger } = req;
+	let user = req.session.username;
+	if(user){
+		res.status(200).send({username : user});
 	}
-	});
-	console.log("Inisde controller");
 });
 
-
-//POST HTTP method to /bucketlist
-
-router.post('/', (req,res,next) => {
-	console.log(req.body);
-	let newList = new bucketlist({
-		title: req.body.title,
-		description: req.body.description,
-		category: req.body.category
-	});
-	bucketlist.addList(newList,(err, list) => {
-		if(err) {
-			res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
-
-		}
-		else
-			res.json({success:true, message: "Added successfully."});
-
-	});
-});
+function verifyToken(req, res, next) {
+  if(!req.headers.authorization) {
+    return res.status(401).send('Unauthorized request')
+  }
+  let token = req.headers.authorization.split(' ')[1]
+  if(token === 'null') {
+    return res.status(401).send('Unauthorized request')
+  }
+  let payload = jwt.verify(token, 'secretKey')
+  if(!payload) {
+    return res.status(401).send('Unauthorized request')
+  }
+  req.userId = payload.subject
+  next()
+}
 
 
-//DELETE HTTP method to /bucketlist. Here, we pass in a params which is the object id.
-router.delete('/:id', (req,res,next)=> {
-	let id = req.params.id;
-	console.log(id);
-	bucketlist.deleteListById(id,(err,list) => {
-		if(err) {
-			res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
-		}
-		else if(list) {
-			res.json({success:true, message: "Deleted successfully"});
-		}
-		else
-			res.json({success:false});
-	})
-});
 
 module.exports = router;

@@ -6,27 +6,22 @@ import { Registration } from '../models/Registration';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class RegistrationService {  
+export class RegistrationService {
 
   constructor(private http: Http) { }
+  private serverApi= 'http://localhost:3000';
 
-  public registration(registration: Registration) {
-    //let URI = `${this.serverApi}/bucketlist/`;
+  public registration(registration: Registration): any {
+    let URI = `${this.serverApi}/api/registration`;
     let headers = new Headers;
-    let body = JSON.stringify({username: registration.username});
-    console.log (body);
-    
-    if(registration.username == 'rohit' && registration.password2 == 'Welcome123'){
-      console.log("In If "+body);
-      return true;
-    }
-    else{
-      return false;
-    }
+    let body = JSON.stringify({username: registration.username, password: registration.password2});
 
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(URI, body ,{headers: headers})
+    .map(res => res.json());
 
   }
-  
+
 
 
 }

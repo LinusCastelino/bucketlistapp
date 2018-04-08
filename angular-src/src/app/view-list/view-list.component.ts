@@ -8,31 +8,31 @@ import { List } from '../models/List'
   styleUrls: ['./view-list.component.css']
 })
 export class ViewListComponent implements OnInit {
-  
+
   //lists propoerty which is an array of List type
   private lists: List[] = [];
 
   constructor(private listServ: ListService) { }
 
   ngOnInit() {
-  
-    //Load all list on init 
+
+    //Load all list on init
   	this.loadLists();
   }
 
   public loadLists() {
-	
+
 	//Get all lists from server and update the lists property
 	this.listServ.getAllLists().subscribe(
-		response => this.lists = response,)
-		
+		response => this.lists = response )
+
   }
 
   //The deleted list is being filtered out using the .filter method
   public deleteList(list: List) {
     this.listServ.deleteList(list._id).subscribe(
 	  response =>	this.lists = this.lists.filter(lists => lists !== list),)
-		
+
 	}
 
   //onAddList will be invoked when the child component emits an event
@@ -40,4 +40,3 @@ export class ViewListComponent implements OnInit {
     this.lists = this.lists.concat(newList);
   }
 }
-	

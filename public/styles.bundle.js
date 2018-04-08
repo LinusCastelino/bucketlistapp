@@ -1,21 +1,48 @@
-webpackJsonp([2],{
+webpackJsonp(["styles"],{
 
-/***/ "./node_modules/css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!./node_modules/postcss-loader/index.js?{\"ident\":\"postcss\"}!./src/styles.css":
+/***/ "../../../../../src/styles.css":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"import\":false}!../../../../postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"sourceMap\":false}!../../../../../src/styles.css");
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__("../../../../style-loader/addStyles.js")(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js??ref--7-1!../node_modules/postcss-loader/lib/index.js??postcss!./styles.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js??ref--7-1!../node_modules/postcss-loader/lib/index.js??postcss!./styles.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "../../../../css-loader/index.js?{\"sourceMap\":false,\"import\":false}!../../../../postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"sourceMap\":false}!../../../../../src/styles.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n.asterix{\r\n    color:red; \r\n    font-size: 17px;\r\n}\r\n\r\n.left-alignment {\r\n    text-align:left;\r\n}\r\n.fontsize{\r\n    font-size: 15px;\r\n}\r\n.success{\r\n    color:green; \r\n    font-size: 15px;\r\n}\r\n    \r\n.error-text{\r\n    font-size: 13px;\r\n    font-family: 'serif';\r\n    padding-left: 8px;\r\n    color:#de2f2f;\r\n}\r\n\r\ninput.ng-valid.ng-touched  {\r\n    \r\n    border: 1px solid #5cb85c;\r\n    border-left: 5px solid #5cb85c;\r\n  }\r\n  \r\n  input.ng-invalid.ng-touched  {\r\n    \r\n    border: 1px solid #de2f2f;\r\n    border-left: 5px solid #de2f2f;\r\n  }\r\n\r\n  .custom-title{\r\n    background-color: #6bb96b;\r\n    color: white;\r\n    border-radius: 25px;\r\n    padding: 5px;\r\n    background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));\r\n  }\r\n\r\n  ", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n.asterix{\r\n    color:red; \r\n    font-size: 17px;\r\n}\r\n.left-alignment {\r\n    text-align:left;\r\n}\r\n.fontsize{\r\n    font-size: 15px;\r\n}\r\n.success{\r\n    color:green; \r\n    font-size: 15px;\r\n}\r\n.error-text{\r\n    font-size: 13px;\r\n    font-family: 'serif';\r\n    padding-left: 8px;\r\n    color:#de2f2f;\r\n}\r\ninput.ng-valid.ng-touched  {\r\n    \r\n    border: 1px solid #5cb85c;\r\n    border-left: 5px solid #5cb85c;\r\n  }\r\ninput.ng-invalid.ng-touched  {\r\n    \r\n    border: 1px solid #de2f2f;\r\n    border-left: 5px solid #de2f2f;\r\n  }\r\n.custom-title{\r\n    background-color: #6bb96b;\r\n    color: white;\r\n    border-radius: 25px;\r\n    padding: 5px;\r\n    background: -webkit-gradient(linear, left top, right top, from(rgba(86, 171, 47, 1)), to(rgba(86, 171, 47, .7)));\r\n    background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));\r\n  }\r\n\r\n  ", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/lib/css-base.js":
+/***/ "../../../../css-loader/lib/css-base.js":
 /***/ (function(module, exports) {
 
 /*
@@ -98,7 +125,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/addStyles.js":
+/***/ "../../../../style-loader/addStyles.js":
 /***/ (function(module, exports) {
 
 /*
@@ -351,37 +378,10 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ "./src/styles.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!./node_modules/postcss-loader/index.js?{\"ident\":\"postcss\"}!./src/styles.css");
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/style-loader/addStyles.js")(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js??ref--9-1!../node_modules/postcss-loader/index.js??postcss!./styles.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js??ref--9-1!../node_modules/postcss-loader/index.js??postcss!./styles.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("./src/styles.css");
+module.exports = __webpack_require__("../../../../../src/styles.css");
 
 
 /***/ })

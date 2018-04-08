@@ -8,11 +8,14 @@ import { ViewListComponent } from './view-list/view-list.component';
 import { ViewOthersListComponent } from './view-others-list/view-others-list.component';
 import { NavigationTabComponent } from './navigation-tab/navigation-tab.component';
 import { ConfirmEqualValidatorDirective } from './directives/validation/confirm-equal-validator.directive';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'bucketlist', component: NavigationTabComponent }
+  { path: 'home', canActivate: [LoginGuard], component: HomeComponent },
+  //{ path: 'bucketlist', component: NavigationTabComponent }
+  { path: 'bucketlist', canActivate: [AuthGuard], component: NavigationTabComponent }
 ];
 
 @NgModule({
