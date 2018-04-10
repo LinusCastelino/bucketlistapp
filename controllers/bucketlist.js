@@ -5,7 +5,9 @@ const request = require('request-promise');
 const jwt = require('jsonwebtoken')
 const bucketlist = require('../models/List');
 const appID = "bucketListApp";
-
+const serviceHost = 'http://localhost:8080';
+const successStatus = 200;
+const unauthorisedStatus = 401;
 
 //POST HTTP method /login
 router.post('/login', (req,res) => {
@@ -14,7 +16,7 @@ router.post('/login', (req,res) => {
    apiLogger.info("Request body login " + JSON.stringify(body));
 	 const options = {
 		 method : 'PUT',
-		 url : 'http://localhost:8080/user/authenticate/user',
+		 url : `${serviceHost}/user/authenticate/user`,
 		 body : {
 			 "applicationId": appID,
 		 	 "password": req.body.password,
@@ -40,7 +42,7 @@ router.post('/login', (req,res) => {
 	 	       let token = jwt.sign(payload, 'secretKey');
 						apiLogger.info(`User : ${req.session.username} logged in`);
 						res.cookie('BKT_USER', req.body.username);
-	 	        res.status(200).send({token, userName: req.body.username})
+	 	        res.status(successStatus).send({token})
 	 	 		 }
 	 })
 	 .catch(function (err){
@@ -58,7 +60,7 @@ router.get('/logout', (req,res) => {
     } else {
 			apiLogger.info(`User : ${user} logged out`);
 			res.clearCookie('BKT_USER');
-      res.status(200).send({});
+      res.status(successStatus).send({});
     }
   });
 });
@@ -71,7 +73,7 @@ router.post('/registration', (req,res) => {
    apiLogger.info("Request body login " + JSON.stringify(body));
 	 const options = {
 		 method : 'POST',
-		 url : 'http://localhost:8080/user/create',
+		 url : `${serviceHost}/user/create`,
 		 body : {
 			 "applicationId": appID,
 		 	 "password": req.body.password,
@@ -82,7 +84,7 @@ router.post('/registration', (req,res) => {
 	 request(options)
 	 .then(function (response){
 		 apiLogger.info(JSON.stringify(response));
-	   res.status(200).send(response)
+	   res.status(successStatus).send(response)
 	 })
 	 .catch(function (err){
 		 console.error("error " + err );
@@ -106,6 +108,27 @@ function verifyToken(req, res, next) {
   next()
 }
 
+router.get('/othersBucketList', (req, res) => {
+	const { apiLogger } = req;
+	let user = req.session.username;
 
+	const requestOptions = {
+		method : 'GET',
+		url: serviceHost + "/bucketlist/notin/" + user,
+		json:true
+	}
+
+	apiLogger.info('Sending request to retrieve other\'s tasks');
+
+	request(requestOptions)
+	.then(function(response){
+		apiLogger.info('Response : ' + JSON.stringify(response));
+		res.status(successStatus).send(response);
+	})
+	.catch(function(error){
+		console.info('Error encountered while trying to retrieve other\'s tasks list ');
+		console.info('Error : ' + JSON.stringify(error));
+	})
+})
 
 module.exports = router;
