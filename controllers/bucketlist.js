@@ -5,7 +5,7 @@ const request = require('request-promise');
 const jwt = require('jsonwebtoken')
 const bucketlist = require('../models/List');
 const appID = "bucketListApp";
-const serviceHost = 'http://localhost:8080';
+const serviceHost = 'http://10.8.6.132:8080';
 const successStatus = 200;
 const unauthorisedStatus = 401;
 
@@ -14,7 +14,7 @@ router.post('/login', (req,res) => {
    const { apiLogger } = req;
 	 let body = req.body;
    apiLogger.info("Request body login " + JSON.stringify(body));
-	 const options = {
+	 const requestOptions = {
 		 method : 'PUT',
 		 url : `${serviceHost}/user/authenticate/user`,
 		 body : {
@@ -24,7 +24,7 @@ router.post('/login', (req,res) => {
 		 },
 		 json: true
 	 }
-	 request(options)
+	 request(requestOptions)
 	 .then(function (response){
 		 apiLogger.info(JSON.stringify(response));
 		 if(response.message === "Wrong Password"){
@@ -71,7 +71,7 @@ router.post('/registration', (req,res) => {
 	 const { apiLogger } = req;
 	 let body = req.body;
    apiLogger.info("Request body login " + JSON.stringify(body));
-	 const options = {
+	 const requestOptions = {
 		 method : 'POST',
 		 url : `${serviceHost}/user/create`,
 		 body : {
@@ -81,7 +81,7 @@ router.post('/registration', (req,res) => {
 		 },
 		 json: true
 	 }
-	 request(options)
+	 request(requestOptions)
 	 .then(function (response){
 		 apiLogger.info(JSON.stringify(response));
 	   res.status(successStatus).send(response)
@@ -122,13 +122,38 @@ router.get('/othersBucketList', (req, res) => {
 
 	request(requestOptions)
 	.then(function(response){
-		apiLogger.info('Response : ' + JSON.stringify(response));
+		apiLogger.info('/othersBucketList Response : ' + JSON.stringify(response));
 		res.status(successStatus).send(response);
 	})
 	.catch(function(error){
-		console.info('Error encountered while trying to retrieve other\'s tasks list ');
-		console.info('Error : ' + JSON.stringify(error));
+		apiLogger.info('Error encountered while trying to retrieve other\'s tasks list ');
+		apiLogger.info('Error : ' + JSON.stringify(error));
 	})
+})
+
+router.post('/claimTask', (req, res) =>{
+	const { apiLogger } = req;
+	let requestBody = req.body;
+	let currentUser = req.session.username;
+	requestBody.newOwner = currentUser;
+
+	const requestOptions = {
+		method : 'PUT',
+		url : serviceHost + '/bucketlist/update/',
+		body : requestBody,
+		json : true
+	}
+
+	request(requestOptions)
+		.then(function(response){
+			apiLogger.info('/claimTask Response : '+JSON.stringify(response));
+			res.status(successStatus).send(response);
+		})
+		.catch(function(error){
+			apiLogger.info('Error encountered while claiming task '+ requestBody.id+' from '+requestBody.oldOwner
+			+' to '+requestBody.newOwner);
+			apiLogger.info('Error : '+ JSON.stringify(error));
+		})
 })
 
 module.exports = router;

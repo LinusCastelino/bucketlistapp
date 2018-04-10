@@ -47,5 +47,14 @@ export class ListService {
   		headers.append('Content-Type', 'application/json');
   		return this.http.post(URI, body ,{headers: headers})
   		.map(res => res.json());
-  	}
+    }
+    
+    public claimTask(list : List) : Observable<any>{
+      let URL = `${this.serverApi}/api/claimTask`;
+      let headers = new Headers;
+      headers.append('Content-Type', 'application/json');
+      let body = JSON.stringify({id: list.id, oldOwner: list.owner});
+      return this.http.post(URL,body, {headers : headers})
+              .map(res => res.json());
+    }
 }

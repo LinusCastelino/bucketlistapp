@@ -20,22 +20,20 @@ export class ViewOthersListComponent implements OnInit {
 public loadLists() {
 //Get all lists from server and update the lists property
 this.listServ.getAllLists().subscribe(
-  response => {
-    console.log('This is the response ' + JSON.stringify(response));
-    this.lists = response})
-  
+  response => 
+    this.lists = response)
 }
 
-//The deleted list is being filtered out using the .filter method
-public deleteList(list: List) {
-  this.listServ.deleteList(list.id).subscribe(
-  response =>	this.lists = this.lists.filter(lists => lists !== list))
-  
+public claimList(list : List){
+  this.listServ.claimTask(list)
+  .subscribe(
+    res => {
+      if(res.message === 'Task Owner Updated Successfully'){
+        this.loadLists();
+      }
+    }
+  );
 }
 
-//onAddList will be invoked when the child component emits an event
-public onAddList(newList) {
-  this.lists = this.lists.concat(newList);
-}
 }
 
