@@ -18,17 +18,18 @@ export class ViewOthersListComponent implements OnInit {
 }
 
 public loadLists() {
-
 //Get all lists from server and update the lists property
 this.listServ.getAllLists().subscribe(
-  response => this.lists = response,)
+  response => {
+    console.log('This is the response ' + JSON.stringify(response));
+    this.lists = response})
   
 }
 
 //The deleted list is being filtered out using the .filter method
 public deleteList(list: List) {
-  this.listServ.deleteList(list._id).subscribe(
-  response =>	this.lists = this.lists.filter(lists => lists !== list),)
+  this.listServ.deleteList(list.id).subscribe(
+  response =>	this.lists = this.lists.filter(lists => lists !== list))
   
 }
 

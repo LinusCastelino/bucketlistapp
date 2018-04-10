@@ -15,15 +15,16 @@ export class AddListComponent implements OnInit {
   ngOnInit() {
   	this.newList = {
   		title: '',
-  		category:'',
+  		priority:'',
   		description:'',
-  		_id:''
+		  id:'',
+		  owner:''
 
   	}
   }
 
   public onSubmit() {
-  	console.log(this.newList.category);
+  	console.log(this.newList.priority);
   	this.listServ.addList(this.newList).subscribe(
   		response=> {
   			
