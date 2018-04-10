@@ -31,7 +31,11 @@ export class ViewListComponent implements OnInit {
   //The deleted list is being filtered out using the .filter method
   public deleteList(list: List) {
     this.listServ.deleteList(list.id).subscribe(
-	  response =>	this.lists = this.lists.filter(lists => lists !== list),)
+	  response =>	{
+      if(response.message === 'Task Deleted Successfully'){
+        this.lists = this.lists.filter(lists => lists !== list)
+      }
+    })
 
 	}
 
@@ -39,4 +43,5 @@ export class ViewListComponent implements OnInit {
   public onAddList(newList) {
     this.lists = this.lists.concat(newList);
   }
+  
 }

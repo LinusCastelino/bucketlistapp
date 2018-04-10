@@ -11,8 +11,7 @@
 
     <div class="tab-content">
       <div id="myList" class="tab-pane fade in active">
-        <app-add-list (addList)="onAddList($event)"> </app-add-list>
-        <app-view-list></app-view-list>
+        <app-view-list #viewList></app-view-list>
       </div>
       <div id="othersList" class="tab-pane fade">
         <app-view-others-list></app-view-others-list>

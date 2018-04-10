@@ -117,6 +117,7 @@ router.get('/othersBucketList', (req, res) => {
 		url: serviceHost + "/bucketlist/notin/" + user,
 		json:true
 	}
+	
 
 	apiLogger.info('Sending request to retrieve other\'s tasks');
 
@@ -130,6 +131,33 @@ router.get('/othersBucketList', (req, res) => {
 		apiLogger.info('Error : ' + JSON.stringify(error));
 	})
 })
+
+
+router.get('/myBucketList', (req, res) => {
+	const { apiLogger } = req;
+	let user = req.session.username;
+
+	const requestOptions = {
+		method : 'GET',
+		url: serviceHost + "/bucketlist/" + user,
+		json:true
+	}
+	
+
+	apiLogger.info('Sending request to retrieve '+user+'\'s tasks');
+
+	request(requestOptions)
+	.then(function(response){
+		apiLogger.info('/myBucketList Response : ' + JSON.stringify(response));
+		res.status(successStatus).send(response);
+	})
+	.catch(function(error){
+		apiLogger.info('Error encountered while trying to retrieve '+user+'\'s tasks list ');
+		apiLogger.info('Error : ' + JSON.stringify(error));
+	})
+})
+
+
 
 router.post('/claimTask', (req, res) =>{
 	const { apiLogger } = req;
@@ -154,6 +182,56 @@ router.post('/claimTask', (req, res) =>{
 			+' to '+requestBody.newOwner);
 			apiLogger.info('Error : '+ JSON.stringify(error));
 		})
+})
+
+
+router.post('/addTask', (req, res) =>{
+	const {apiLogger} = req;
+	let requestBody = req.body;
+	let currentUser = req.session.username;
+	requestBody.owner = currentUser;
+
+	const requestOptions = {
+		method : 'POST',
+		url : serviceHost + '/bucketlist/createBucketList/',
+		body : requestBody,
+		json : true
+	}
+
+	request(requestOptions)
+		.then(function(response){
+			apiLogger.info('/addTask Response : '+JSON.stringify(response));
+			res.status(successStatus).send(response);
+		})
+		.catch(function(error){
+			apiLogger.info('Error encountered while adding task '+requestBody.owner);
+			apiLogger.info('Error : '+ JSON.stringify(error));
+		})
+})
+
+
+
+router.delete('/deleteTask/:id', (req, res) => {
+	const { apiLogger } = req;
+	let taskID = req.params.id;
+	const requestOptions = {
+		method : 'DELETE',
+		url: serviceHost + "/bucketlist/delete/" + taskID,
+		json:true
+	}
+	
+
+	apiLogger.info('Sending request to delete task '+taskID);
+
+	request(requestOptions)
+	.then(function(response){
+		apiLogger.info('/deleteTask/'+taskID+' Response : ' + JSON.stringify(response));
+		res.status(successStatus).send(response);
+	})
+	.catch(function(error){
+		apiLogger.info('Error encountered while trying to delete task '+taskID);
+		apiLogger.info('Error : ' + JSON.stringify(error));
+	})
 })
 
 module.exports = router;

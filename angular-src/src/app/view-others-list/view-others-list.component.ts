@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { List } from '../models/List'
 
@@ -6,11 +6,13 @@ import { List } from '../models/List'
 @Component({
   selector: 'app-view-others-list',
   templateUrl: './view-others-list.component.html',
+  // templateUrl: `<app-view-others-list></app-view-others-list>`,
   styleUrls: ['./view-others-list.component.css']
 })
 export class ViewOthersListComponent implements OnInit {
   private lists: List[] = [];
   constructor(private listServ: ListService) { }
+ 
 
   ngOnInit() {
   //Load all list on init 
@@ -19,7 +21,7 @@ export class ViewOthersListComponent implements OnInit {
 
 public loadLists() {
 //Get all lists from server and update the lists property
-this.listServ.getAllLists().subscribe(
+this.listServ.getAllOthersLists().subscribe(
   response => 
     this.lists = response)
 }

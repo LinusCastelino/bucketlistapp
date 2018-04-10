@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
 
+
 @Component({
   selector: 'app-add-list',
   templateUrl: './add-list.component.html',
@@ -15,7 +16,7 @@ export class AddListComponent implements OnInit {
   ngOnInit() {
   	this.newList = {
   		title: '',
-  		priority:'',
+  		priority:'Low',
   		description:'',
 		  id:'',
 		  owner:''
@@ -23,15 +24,24 @@ export class AddListComponent implements OnInit {
   	}
   }
 
-  public onSubmit() {
-  	console.log(this.newList.priority);
+  public addTask() {
   	this.listServ.addList(this.newList).subscribe(
-  		response=> {
-  			
-  			if(response.success== true)
-  				this.addList.emit(this.newList);
-  		},
+  		response=> {  			
+  			if(response.message === 'Task Created Successfully'){
+				 console.log("task added successfully "); 
+				 this.addList.emit(this.newList);
+				 this.newList = {
+					title: '',
+					priority:'Low',
+					description:'',
+					id:'',
+					owner:''
+		  
+				}
+			  }			  			  
+  		}
 	);
 
 	}
+
 }

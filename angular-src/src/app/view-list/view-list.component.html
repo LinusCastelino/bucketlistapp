@@ -1,4 +1,4 @@
-  <!-- <app-navigation-tab></app-navigation-tab> -->
+  <app-add-list (addList)="onAddList($event)"> </app-add-list>
   <br>
   <!-- Table starts here -->
   <h3 class= "custom-title">My List</h3>
@@ -15,7 +15,7 @@
       </thead>
       <tbody>
       	<tr *ngFor="let list of lists">
-      	  <td>{{list.Priority}}</td>
+      	  <td>{{list.priority}}</td>
           <td>{{list.title}}</td>
           <td>{{list.description}}</td>
           <td> <button type="button" class="btn btn-success" (click)="assignList(list); $event.stopPropagation();">Assign</button></td>  

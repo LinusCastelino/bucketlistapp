@@ -13,7 +13,14 @@ export class ListService {
     private serverApi= 'http://localhost:3000';
 
 
-    public getAllLists():any {
+    public getAllLists():any{
+      let URI = `${this.serverApi}/api/myBucketList`;
+      return this.http.get(URI, {withCredentials : true})
+              .map(res => res.json())
+    }
+
+
+    public getAllOthersLists():any {
 
       let URI = `${this.serverApi}/api/othersBucketList`;
       return this.http.get(URI, {withCredentials : true})
@@ -32,20 +39,20 @@ export class ListService {
 
     public deleteList(listId : string) {
       console.log("inside delete function "+listId);
-      let URI = `${this.serverApi}/bucketlist/${listId}`;
-        let headers = new Headers;
-        headers.append('Content-Type', 'application/json');
-        return this.http.delete(URI, {headers: headers})
+      let URI = `${this.serverApi}/api/deleteTask/${listId}`;
+      let headers = new Headers;
+      headers.append('Content-Type', 'application/json');
+      return this.http.delete(URI, {headers: headers})
         .map(res => res.json());
     }
 
     	public addList(list: List) {
-  		let URI = `${this.serverApi}/bucketlist/`;
+  		let URI = `${this.serverApi}/api/addTask/`;
   		let headers = new Headers;
-       let body = JSON.stringify({title: list.title, description: list.description, category: list.priority});
+       let body = JSON.stringify({title: list.title, description: list.description, priority: list.priority});
        console.log(body);
   		headers.append('Content-Type', 'application/json');
-  		return this.http.post(URI, body ,{headers: headers})
+  		return this.http.post(URI, body ,{headers: headers, withCredentials: true})
   		.map(res => res.json());
     }
     
