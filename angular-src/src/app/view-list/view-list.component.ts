@@ -24,13 +24,13 @@ export class ViewListComponent implements OnInit {
 
 	//Get all lists from server and update the lists property
 	this.listServ.getAllLists().subscribe(
-		response => this.lists = response )
+		response => this.lists = response)
 
   }
 
   //The deleted list is being filtered out using the .filter method
   public deleteList(list: List) {
-    this.listServ.deleteList(list._id).subscribe(
+    this.listServ.deleteList(list.id).subscribe(
 	  response =>	this.lists = this.lists.filter(lists => lists !== list),)
 
 	}

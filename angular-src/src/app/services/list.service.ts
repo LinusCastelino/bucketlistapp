@@ -13,17 +13,21 @@ export class ListService {
     private serverApi= 'http://localhost:3000';
 
 
-    public getAllLists():Observable<List[]> {
+    public getAllLists():any {
 
+      let URI = `${this.serverApi}/api/othersBucketList`;
+      return this.http.get(URI, {withCredentials : true})
+              .map(res => res.json())
+              // .map(res => <List[]> res.list);
 
       // let URI = `${this.serverApi}/bucketlist/`;
       //   return this.http.get(URI)
 
-      return this.http.get('./assets/data/data.json')
-        .map(res => res.json())
-        .map(res =>
-          <List[]>res.list
-        );
+      // return this.http.get('./assets/data/data.json')
+      //   .map(res => res.json())
+      //   .map(res =>
+      //     <List[]>res.list
+      //   );
     }
 
     public deleteList(listId : string) {
@@ -38,7 +42,7 @@ export class ListService {
     	public addList(list: List) {
   		let URI = `${this.serverApi}/bucketlist/`;
   		let headers = new Headers;
-       let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
+       let body = JSON.stringify({title: list.title, description: list.description, category: list.priority});
        console.log(body);
   		headers.append('Content-Type', 'application/json');
   		return this.http.post(URI, body ,{headers: headers})

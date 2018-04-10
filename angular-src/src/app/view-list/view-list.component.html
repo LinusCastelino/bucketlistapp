@@ -15,7 +15,7 @@
       </thead>
       <tbody>
       	<tr *ngFor="let list of lists">
-      	  <td>{{list.category}}</td>
+      	  <td>{{list.Priority}}</td>
           <td>{{list.title}}</td>
           <td>{{list.description}}</td>
           <td> <button type="button" class="btn btn-success" (click)="assignList(list); $event.stopPropagation();">Assign</button></td>  

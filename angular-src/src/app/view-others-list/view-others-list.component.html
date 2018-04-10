@@ -8,14 +8,16 @@
           <th class="align-center">Priority Level</th>
           <th class="align-center">Title</th>
           <th class="align-center"> Description</th>
+          <th class="align-center"> Owner</th>
           <th class="align-center"> Claim </th>
         </tr>
       </thead>
       <tbody>
       	<tr *ngFor="let list of lists">
-      	  <td>{{list.category}}</td>
+      	  <td>{{list.priority}}</td>
           <td>{{list.title}}</td>
           <td>{{list.description}}</td>
+          <td>{{list.owner}}</td>
           <td> <button type="button" class="btn btn-success" (click)="claimList(list); $event.stopPropagation();">Claim</button></td>  
         </tr>
       </tbody>

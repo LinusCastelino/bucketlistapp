@@ -1,7 +1,8 @@
 export interface List {
-    _id?: string;
+    id: string;
     title: string;
     description: string;
-    category: string;
+    priority: string;
+    owner: string;
     
 }
