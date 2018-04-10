@@ -39,7 +39,8 @@ router.post('/login', (req,res) => {
 	 	 			 let payload = {subject: req.body.username};
 	 	       let token = jwt.sign(payload, 'secretKey');
 						apiLogger.info(`User : ${req.session.username} logged in`);
-	 	        res.status(200).send({token})
+						res.cookie('BKT_USER', req.body.username);
+	 	        res.status(200).send({token, userName: req.body.username})
 	 	 		 }
 	 })
 	 .catch(function (err){
@@ -56,6 +57,7 @@ router.get('/logout', (req,res) => {
       res.status(500).send('Could not log out.');
     } else {
 			apiLogger.info(`User : ${user} logged out`);
+			res.clearCookie('BKT_USER');
       res.status(200).send({});
     }
   });
@@ -86,15 +88,6 @@ router.post('/registration', (req,res) => {
 		 console.error("error " + err );
 	 })
 
-});
-
-//get username from session
-router.get('/getUsername', verifyToken, (req,res) => {
-	const { apiLogger } = req;
-	let user = req.session.username;
-	if(user){
-		res.status(200).send({username : user});
-	}
 });
 
 function verifyToken(req, res, next) {

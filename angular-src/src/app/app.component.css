@@ -31,3 +31,9 @@
     border: 1px solid palegreen;
     font-family: verdana;
 }
+
+.vertical-line{
+    border-right: 1px solid white;
+    margin-right: 5px;
+    margin-left: 1px;    
+}

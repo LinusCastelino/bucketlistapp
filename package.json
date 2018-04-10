@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.2.1",
     "logrotator": "^1.1.0",
     "mongoose": "~4.11.0",
+    "ngx-cookie-service": "^1.0.10",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   },

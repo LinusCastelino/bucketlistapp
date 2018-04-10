@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppStateService } from './services/app.state.service';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -8,21 +9,9 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   title = 'Awesome Bucketlist App';
-  username = '';
-  constructor(private _loginService: LoginService){
+  
+  
+  constructor(private _loginService: LoginService, public appStateService: AppStateService) {
   }
-
-  public getUsername() {
-     const response = this._loginService.getUsername()
-     .subscribe(
-       res => {
-           this.username = res.username;
-         }
-       ,
-       err => {console.log(err);
-       }
-     );
-
-	}
 
 }

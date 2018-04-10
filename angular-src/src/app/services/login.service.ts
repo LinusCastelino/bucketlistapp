@@ -19,6 +19,7 @@ export class LoginService {
 
     headers.append('Content-Type', 'application/json');
     return this.http.post(URI, body ,{headers: headers})
+    .map(res => res.json())
   }
 
   public loggedIn() {

@@ -12,8 +12,9 @@
 
     <div id="logout-btn">
       <div class="welcome-title"
-        *ngIf="_loginService.loggedIn()" > Howdy, rohit23444</div>
+        *ngIf="_loginService.loggedIn()" > Howdy, {{ appStateService.userName }}</div>
       &nbsp;
+      <span *ngIf="_loginService.loggedIn()" class="vertical-line"></span>
       <button type="button" class="btn btn-default btn-sm" style="border-radius: 19px;"
     *ngIf="_loginService.loggedIn()" (click)="_loginService.logoutUser()">
         <span class="glyphicon glyphicon-log-out"></span> Log out

@@ -13,6 +13,8 @@ import { RegistrationService } from './services/registration.service';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { AppStateService } from './services/app.state.service';
+import { CookieService } from 'ngx-cookie-service';
 // import { ConfirmEqualValidatorDirective } from './directives/validation/confirm-equal-validator.directive';
 //import { HomeComponent } from './home/home.component';
 // import { AddListComponent } from './add-list/add-list.component';
@@ -39,12 +41,13 @@ import { TokenInterceptorService } from './token-interceptor.service';
     AppRoutingModule
   ],
   //All the services go here.
-  providers: [ListService, LoginService, RegistrationService, AuthGuard, LoginGuard,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }],
+  providers: [ListService, LoginService, RegistrationService, 
+              AuthGuard, LoginGuard, AppStateService, CookieService,
+              {
+                provide: HTTP_INTERCEPTORS,
+                useClass: TokenInterceptorService,
+                multi: true
+              }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
