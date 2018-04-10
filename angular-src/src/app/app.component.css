@@ -7,3 +7,27 @@
     background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));
     margin-bottom: 50px;
 }
+
+@media screen and (max-width: 600px) {
+#logout-btn{
+    right: 40px;
+}   
+}
+
+#logout-btn {
+    position: absolute;
+    right: 58px;
+    top: 46px;
+    color: white;
+    display: flex;
+}
+
+.welcome-title{
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    padding: 0 10px;
+    background : #17a017;
+    border: 1px solid palegreen;
+    font-family: verdana;
+}

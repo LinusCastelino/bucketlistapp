@@ -1,10 +1,24 @@
 <!--The whole content below can be removed with the new code.-->
 <div style="text-align:center">
-  <h1 class="header-class">
-     {{title}}
-  </h1>
-  <span *ngIf="_loginService.loggedIn()"> Howdy {{ username }} ,</span>
-  <a class="nav-link" style="cursor:pointer" *ngIf="_loginService.loggedIn()" (click)="_loginService.logoutUser()">Logout</a>
+
+    <h1 class="header-class">
+      {{title}}
+    </h1>
+    <!-- <a class="nav-link" style="cursor:pointer;position: absolute;right: 58px;top: 60px;color: white;" 
+    *ngIf="_loginService.loggedIn()" (click)="_loginService.logoutUser()">
+      <span class="glyphicon glyphicon-log-out"></span>
+      Logout
+    </a> -->
+
+    <div id="logout-btn">
+      <div class="welcome-title"
+        *ngIf="_loginService.loggedIn()" > Howdy, rohit23444</div>
+      &nbsp;
+      <button type="button" class="btn btn-default btn-sm" style="border-radius: 19px;"
+    *ngIf="_loginService.loggedIn()" (click)="_loginService.logoutUser()">
+        <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
+  </div>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
