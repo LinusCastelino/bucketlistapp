@@ -157,6 +157,33 @@ router.get('/myBucketList', (req, res) => {
 	})
 })
 
+router.get('/allOwners', (req, res) => {
+	const { apiLogger } = req;
+	let user = req.session.username;
+
+	const requestOptions = {
+		method : 'GET',
+		url: serviceHost + "/user/all/userList/bucketListApp" ,
+		json:true
+	}
+	
+
+	apiLogger.info('Sending request to retrieve all owners');
+
+	request(requestOptions)
+	.then(function(response){
+		apiLogger.info('/allOwners Response : ' + JSON.stringify(response));
+		apiLogger.info('Before filtering : '+JSON.stringify(response));
+		response.filter(lists => lists !== user)
+		apiLogger.info('After filtering : '+JSON.stringify(response));
+		res.status(successStatus).send(response);
+	})
+	.catch(function(error){
+		apiLogger.info('Error encountered while trying to retrieve allOwners list ');
+		apiLogger.info('Error : ' + JSON.stringify(error));
+	})
+})
+
 
 
 router.post('/claimTask', (req, res) =>{

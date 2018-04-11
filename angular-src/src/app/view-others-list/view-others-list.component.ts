@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { List } from '../models/List'
+import { AppStateService } from '../services/app.state.service'
 
 
 @Component({
@@ -11,7 +12,8 @@ import { List } from '../models/List'
 })
 export class ViewOthersListComponent implements OnInit {
   private lists: List[] = [];
-  constructor(private listServ: ListService) { }
+
+  constructor(private listServ: ListService, private appStateService : AppStateService) { }
  
 
   ngOnInit() {
@@ -32,8 +34,11 @@ public claimList(list : List){
     res => {
       if(res.message === 'Task Owner Updated Successfully'){
         this.loadLists();
+
+        this.appStateService.refreshUserList();
       }
     }
+
   );
 }
 

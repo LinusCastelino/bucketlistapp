@@ -5,15 +5,15 @@
   </ul> -->
   <div>
   <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="pill" href="#myList">My List</a></li>
-      <li><a data-toggle="pill" href="#othersList">Others list</a></li>
+      <li class="nav-item" class="active"><a class="nav-link active" data-toggle="pill" href="#myList">My List</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#othersList">Others list</a></li>
     </ul>
 
     <div class="tab-content">
-      <div id="myList" class="tab-pane fade in active">
+      <div id="myList" class="container tab-pane active">
         <app-view-list #viewList></app-view-list>
       </div>
-      <div id="othersList" class="tab-pane fade">
+      <div id="othersList" class="container tab-pane fade">
         <app-view-others-list></app-view-others-list>
       </div>
 

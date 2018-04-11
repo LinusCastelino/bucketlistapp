@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 export class RegistrationService {
 
   constructor(private http: Http) { }
-  private serverApi= 'http://localhost:3000';
+  private serverApi= 'http://10.8.6.43:3000';
 
   public registration(registration: Registration): any {
     let URI = `${this.serverApi}/api/registration`;

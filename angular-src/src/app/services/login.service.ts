@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class LoginService {
 
   constructor(private http: Http, private _router: Router) { }
-   private serverApi= 'http://localhost:3000';
+   private serverApi= 'http://10.8.6.43:3000';
 
   public login(login: Login) : any {
     let URI = `${this.serverApi}/api/login`;

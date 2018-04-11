@@ -5,3 +5,12 @@
 .align-center {
 	text-align: center;
 }
+
+.custom-modal{
+	opacity: 1;
+	top : 30px !important;
+}
+
+/* .model-content .custom-modal{
+	top : 30px !important;
+} */

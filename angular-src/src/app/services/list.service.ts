@@ -10,11 +10,17 @@ export class ListService {
 
     constructor(private http: Http) { }
 
-    private serverApi= 'http://localhost:3000';
+    private serverApi= 'http://10.8.6.43:3000';
 
 
     public getAllLists():any{
       let URI = `${this.serverApi}/api/myBucketList`;
+      return this.http.get(URI, {withCredentials : true})
+              .map(res => res.json())
+    }
+
+    public getAllOwners():any{
+      let URI = `${this.serverApi}/api/allOwners`;
       return this.http.get(URI, {withCredentials : true})
               .map(res => res.json())
     }
