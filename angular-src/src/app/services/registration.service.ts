@@ -12,7 +12,7 @@ export class RegistrationService {
   private serverApi= 'http://localhost:3000';
 
   public registration(registration: Registration): any {
-    let URI = `${this.serverApi}/api/registration`;
+    let URI = `/api/registration`;
     let headers = new Headers;
     let body = JSON.stringify({username: registration.username, password: registration.password2});
 

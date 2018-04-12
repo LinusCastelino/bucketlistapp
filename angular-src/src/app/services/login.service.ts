@@ -13,7 +13,7 @@ export class LoginService {
    private serverApi= 'http://localhost:3000';
 
   public login(login: Login) : any {
-    let URI = `${this.serverApi}/api/login`;
+    let URI = `/api/login`;
     let headers = new Headers;
     let body = JSON.stringify({username: login.username, password: login.password});
 
@@ -27,7 +27,7 @@ export class LoginService {
   }
 
   public logoutUser() {
-    let URI = `${this.serverApi}/api/logout`;
+    let URI = `/api/logout`;
     this.http.get(URI,{
       withCredentials: true
     })
@@ -44,7 +44,7 @@ export class LoginService {
   }
 
   public getUsername() : any {
-    let URI = `${this.serverApi}/api/getUsername`;
+    let URI = `/api/getUsername`;
     this.http.get(URI,{
       withCredentials: true
     })

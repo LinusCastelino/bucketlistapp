@@ -14,13 +14,13 @@ export class ListService {
 
 
     public getAllLists():any{
-      let URI = `${this.serverApi}/api/myBucketList`;
+      let URI = `/api/myBucketList`;
       return this.http.get(URI, {withCredentials : true})
               .map(res => res.json())
     }
 
     public getAllOwners():any{
-      let URI = `${this.serverApi}/api/allOwners`;
+      let URI = `/api/allOwners`;
       return this.http.get(URI, {withCredentials : true})
               .map(res => res.json())
     }
@@ -28,12 +28,12 @@ export class ListService {
 
     public getAllOthersLists():any {
 
-      let URI = `${this.serverApi}/api/othersBucketList`;
+      let URI = `/api/othersBucketList`;
       return this.http.get(URI, {withCredentials : true})
               .map(res => res.json())
               // .map(res => <List[]> res.list);
 
-      // let URI = `${this.serverApi}/bucketlist/`;
+      // let URI = `/bucketlist/`;
       //   return this.http.get(URI)
 
       // return this.http.get('./assets/data/data.json')
@@ -45,7 +45,7 @@ export class ListService {
 
     public deleteList(listId : string) {
       console.log("inside delete function "+listId);
-      let URI = `${this.serverApi}/api/deleteTask/${listId}`;
+      let URI = `/api/deleteTask/${listId}`;
       let headers = new Headers;
       headers.append('Content-Type', 'application/json');
       return this.http.delete(URI, {headers: headers})
@@ -53,7 +53,7 @@ export class ListService {
     }
 
     	public addList(list: List) {
-  		let URI = `${this.serverApi}/api/addTask/`;
+  		let URI = `/api/addTask/`;
   		let headers = new Headers;
        let body = JSON.stringify({title: list.title, description: list.description, priority: list.priority});
        console.log(body);
@@ -63,7 +63,7 @@ export class ListService {
     }
     
     public claimTask(list : List) : Observable<any>{
-      let URL = `${this.serverApi}/api/claimTask`;
+      let URL = `/api/claimTask`;
       let headers = new Headers;
       headers.append('Content-Type', 'application/json');
       let body = JSON.stringify({id: list.id, oldOwner: list.owner});
@@ -72,7 +72,7 @@ export class ListService {
     }
 
     public assignTaskToNewOwner(taskID:string, newOwner:string):Observable<any>{
-      let URL = `${this.serverApi}/api/assignTask`;
+      let URL = `/api/assignTask`;
       let headers = new Headers;
       headers.append('Content-Type', 'application/json');
       let body = JSON.stringify({id: taskID, newOwner: newOwner});
