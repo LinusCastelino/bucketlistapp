@@ -5,8 +5,8 @@ const request = require('request-promise');
 const jwt = require('jsonwebtoken')
 const bucketlist = require('../models/List');
 const appID = "bucketListApp";
-// const serviceHost = 'http://10.8.6.132:8080';
-const serviceHost = 'http://localhost:8080';
+const serviceHost = 'http://10.8.6.132:8080';
+// const serviceHost = 'http://localhost:8080';
 const successStatus = 200;
 const unauthorisedStatus = 401;
 
