@@ -8,7 +8,7 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Awesome Bucketlist App';
+  title = 'Awesome Bucketlist';
   
   
   constructor(private _loginService: LoginService, public appStateService: AppStateService) {

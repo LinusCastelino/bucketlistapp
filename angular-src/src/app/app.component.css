@@ -43,3 +43,9 @@
         left:0;
     }   
 }
+
+@media screen and (max-width:337px) {
+    #logout-btn{
+        top: 120px;
+    }   
+}
