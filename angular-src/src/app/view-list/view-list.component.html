@@ -16,15 +16,15 @@
           
         </tr>
       </thead>
-        <tbody>
-          <tr *ngFor="let list of lists">
-            <td>{{list.priority}}</td>  
-            <td>{{list.title}}</td>
-            <td>{{list.description}}</td>
-            <td> <button type="button" class="btn btn-success" (click)="assign(content, list)">Assign</button></td>  
-            <td> <button type="button" class="btn btn-danger"  (click)="deleteList(list); $event.stopPropagation();">Delete</button></td>
-          </tr>
-        </tbody>
+      <tbody>
+      	<tr *ngFor="let list of lists">
+      	  <td>{{list.priority}}</td>  
+          <td>{{list.title}}</td>
+          <td>{{list.description}}</td>
+          <td> <button type="button" class="btn btn-success" (click)="assign(content,list)">Assign</button></td>  
+          <td> <button type="button" class="btn btn-danger"  (click)="deleteList(list); $event.stopPropagation();">Delete</button></td>
+        </tr> 
+      </tbody>
    </table>
   </div>
 
