@@ -1,0 +1,11 @@
+.custom-line{
+    padding: 3%; 
+    border-left: 2px solid green;
+}
+
+@media screen and (max-width:767px){
+    .custom-line{
+        border-left: 0px solid #fff;
+        border-top: 2px solid green;
+    }
+}

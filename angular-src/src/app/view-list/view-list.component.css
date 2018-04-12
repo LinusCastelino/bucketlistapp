@@ -14,3 +14,8 @@
 /* .model-content .custom-modal{
 	top : 30px !important;
 } */
+
+.custom-table{
+	height: 240px;
+	overflow-y:scroll;
+}

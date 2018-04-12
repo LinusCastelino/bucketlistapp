@@ -5,21 +5,17 @@
     background-color: #5cb85c;
     color: white;
     background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));
-    margin-bottom: 50px;
 }
 
-@media screen and (max-width: 600px) {
-#logout-btn{
-    right: 40px;
-}   
-}
+
 
 #logout-btn {
     position: absolute;
-    right: 58px;
+    right: 0;
     top: 46px;
     color: white;
     display: flex;
+    padding-right: 20px;
 }
 
 .welcome-title{
@@ -36,4 +32,14 @@
     border-right: 1px solid white;
     margin-right: 5px;
     margin-left: 1px;    
+}
+
+@media screen and (max-width:915px) {
+    #logout-btn{
+        right: 0;
+        display: flex;
+        justify-content: center;
+        top: 84px;
+        left:0;
+    }   
 }
