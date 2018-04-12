@@ -32,11 +32,7 @@ export class ViewListComponent implements OnInit {
 
   public loadLists() {
     //Get all lists from server and update the lists property
-	  this.listServ.getAllLists().subscribe(
-      response => {
-        this.initialLoadList = response;
-        this.appStateService.updateCurrentUserList(this.initialLoadList);
-      })
+	  this.appStateService.refreshUserList();
     this.appStateService.currentUserList.subscribe(userList => this.lists = userList);
   }
 
@@ -93,7 +89,7 @@ export class ViewListComponent implements OnInit {
           if(res.message === 'Task Owner Updated Successfully'){
             this.loadLists();
     
-            this.appStateService.refreshUserList();
+            this.appStateService.refreshOthersList();
           }
         }
       );
