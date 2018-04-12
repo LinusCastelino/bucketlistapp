@@ -12,6 +12,7 @@ import { AppStateService } from '../services/app.state.service'
 })
 export class ViewOthersListComponent implements OnInit {
   private lists: List[] = [];
+  initialOthersList: List[]= [];
 
   constructor(private listServ: ListService, private appStateService : AppStateService) { }
  
@@ -23,9 +24,8 @@ export class ViewOthersListComponent implements OnInit {
 
 public loadLists() {
 //Get all lists from server and update the lists property
-this.listServ.getAllOthersLists().subscribe(
-  response => 
-    this.lists = response)
+  this.appStateService.refreshOthersList();
+  this.appStateService.currentOthersList.subscribe(userList => this.lists = userList);
 }
 
 public claimList(list : List){

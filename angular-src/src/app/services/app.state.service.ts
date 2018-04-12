@@ -10,6 +10,9 @@ export class AppStateService {
   private userList = new BehaviorSubject<List[]>([]);
   currentUserList = this.userList.asObservable();
 
+  private othersList = new BehaviorSubject<List[]>([]);
+  currentOthersList = this.othersList.asObservable();
+
   constructor(private cookieService: CookieService, private listServ: ListService) { }
 
   get userName(): string {
@@ -26,6 +29,17 @@ export class AppStateService {
     this.listServ.getAllLists().subscribe(
       response => {
         this.userList.next(response);
+      })
+  }
+
+  public updateOthersList(updatedOthersList: List[]){
+    this.othersList.next(updatedOthersList);
+  }
+
+  public refreshOthersList(){
+    this.listServ.getAllOthersLists().subscribe(
+      response => {
+        this.othersList.next(response);
       })
   }
 }
