@@ -16,6 +16,9 @@ export class ViewListComponent implements OnInit {
   initialLoadList: List[]= [];
   closeResult: string;
   private ownerList: any = [];
+  selectedTaskTitle: string= '';
+  selectedTaskID: string= '';
+  newlyAssignedOwner : string = 'Select assignee';
 
   constructor(private listServ: ListService, private appStateService : AppStateService, 
               private modalService: NgbModal) { }
@@ -53,7 +56,9 @@ export class ViewListComponent implements OnInit {
     this.lists = this.lists.concat(newList);
   }
 
-  public assign(content) {
+  public assign(content, selectedList: List) {
+    this.selectedTaskTitle = selectedList.title;
+    this.selectedTaskID = selectedList.id;
     this.modalService.open(content, { centered: true }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -80,4 +85,19 @@ export class ViewListComponent implements OnInit {
 
   }
   
+  assignNewOwner(){
+    if(this.newlyAssignedOwner != 'Select assignee'){
+      this.listServ.assignTaskToNewOwner(this.selectedTaskID, this.newlyAssignedOwner)
+      .subscribe(
+        res => {
+          if(res.message === 'Task Owner Updated Successfully'){
+            this.loadLists();
+    
+            this.appStateService.refreshUserList();
+          }
+        }
+      );
+    }
+  }
+
 }

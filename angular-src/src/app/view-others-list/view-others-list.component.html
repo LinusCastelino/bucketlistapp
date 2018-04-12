@@ -2,6 +2,7 @@
   <br>
   <!-- Table starts here -->
   <h4 class= "custom-title">Others List</h4>
+  <div *ngIf="lists?.length > 0">
   <table id="table" class="table table-hover table-mc-light-blue">
       <thead>
         <tr class="align-center">
@@ -22,6 +23,10 @@
         </tr>
       </tbody>
    </table>
+   </div>
 
+   <div *ngIf="lists?.length == 0">
+     No tasks remaining to claim !
+    </div>
 
  <!-- <app-add-list (addList)="onAddList($event)"> </app-add-list> -->

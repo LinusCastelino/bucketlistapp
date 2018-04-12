@@ -10,7 +10,7 @@ export class ListService {
 
     constructor(private http: Http) { }
 
-    private serverApi= 'http://10.8.6.43:3000';
+    private serverApi= 'http://localhost:3000';
 
 
     public getAllLists():any{
@@ -67,6 +67,15 @@ export class ListService {
       let headers = new Headers;
       headers.append('Content-Type', 'application/json');
       let body = JSON.stringify({id: list.id, oldOwner: list.owner});
+      return this.http.post(URL,body, {headers : headers})
+              .map(res => res.json());
+    }
+
+    public assignTaskToNewOwner(taskID:string, newOwner:string):Observable<any>{
+      let URL = `${this.serverApi}/api/assignTask`;
+      let headers = new Headers;
+      headers.append('Content-Type', 'application/json');
+      let body = JSON.stringify({id: taskID, newOwner: newOwner});
       return this.http.post(URL,body, {headers : headers})
               .map(res => res.json());
     }

@@ -5,7 +5,8 @@ const request = require('request-promise');
 const jwt = require('jsonwebtoken')
 const bucketlist = require('../models/List');
 const appID = "bucketListApp";
-const serviceHost = 'http://10.8.6.132:8080';
+// const serviceHost = 'http://10.8.6.132:8080';
+const serviceHost = 'http://localhost:8080';
 const successStatus = 200;
 const unauthorisedStatus = 401;
 
@@ -174,9 +175,9 @@ router.get('/allOwners', (req, res) => {
 	.then(function(response){
 		apiLogger.info('/allOwners Response : ' + JSON.stringify(response));
 		apiLogger.info('Before filtering : '+JSON.stringify(response));
-		response.filter(lists => lists !== user)
-		apiLogger.info('After filtering : '+JSON.stringify(response));
-		res.status(successStatus).send(response);
+		let filteredResponse = response.filter(lists => lists !== user);
+		apiLogger.info('After filtering : '+JSON.stringify(filteredResponse));
+		res.status(successStatus).send(filteredResponse);
 	})
 	.catch(function(error){
 		apiLogger.info('Error encountered while trying to retrieve allOwners list ');
@@ -206,6 +207,31 @@ router.post('/claimTask', (req, res) =>{
 		})
 		.catch(function(error){
 			apiLogger.info('Error encountered while claiming task '+ requestBody.id+' from '+requestBody.oldOwner
+			+' to '+requestBody.newOwner);
+			apiLogger.info('Error : '+ JSON.stringify(error));
+		})
+})
+
+router.post('/assignTask', (req, res) =>{
+	const { apiLogger } = req;
+	let requestBody = req.body;
+	let currentUser = req.session.username;
+	requestBody.oldOwner = currentUser;
+
+	const requestOptions = {
+		method : 'PUT',
+		url : serviceHost + '/bucketlist/update/',
+		body : requestBody,
+		json : true
+	}
+
+	request(requestOptions)
+		.then(function(response){
+			apiLogger.info('/assignTask Response : '+JSON.stringify(response));
+			res.status(successStatus).send(response);
+		})
+		.catch(function(error){
+			apiLogger.info('Error encountered while assigning task '+ requestBody.id+' from '+requestBody.oldOwner
 			+' to '+requestBody.newOwner);
 			apiLogger.info('Error : '+ JSON.stringify(error));
 		})

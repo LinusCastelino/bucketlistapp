@@ -19,7 +19,7 @@ export class AppStateService {
   public updateCurrentUserList(updatedList : List[]){
     this.userList.next(updatedList);
 
-    console.log('Updated injectable list with '+JSON.stringify(updatedList));
+    // console.log('Updated injectable list with '+JSON.stringify(updatedList));
   }
 
   public refreshUserList(){
