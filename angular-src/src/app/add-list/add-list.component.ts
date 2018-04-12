@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
+import { AppStateService } from '../services/app.state.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ListService } from '../services/list.service';
 export class AddListComponent implements OnInit {
   private newList :List;
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
-  constructor(private listServ: ListService) { }
+  constructor(private listServ: ListService, private appStateService: AppStateService) { }
  
   ngOnInit() {
   	this.newList = {
@@ -28,8 +29,9 @@ export class AddListComponent implements OnInit {
   	this.listServ.addList(this.newList).subscribe(
   		response=> {  			
   			if(response.message === 'Task Created Successfully'){
-				 console.log("task added successfully "); 
-				 this.addList.emit(this.newList);
+				 console.log("task added successfully ");
+				 this.appStateService.refreshUserList(); 
+				 //this.addList.emit(this.newList);
 				 this.newList = {
 					title: '',
 					priority:'Low',

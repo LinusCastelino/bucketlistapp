@@ -5,3 +5,7 @@
 .custom-margin{
 	margin-top: 43px;		
 }
+
+.modal-dialog{
+	width:500px;
+}

@@ -42,4 +42,9 @@ input.ng-valid.ng-touched  {
     background: linear-gradient(to right, rgba(86, 171, 47, 1), rgba(86, 171, 47, .7));
   }
 
+  @media (min-width: 768px){
+  .modal-dialog {
+    width:500px;
+  }}
+
   
